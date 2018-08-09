@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import app.models.Usuario;
+import br.com.caelum.vraptor.converter.LongConverter;
 import br.com.caelum.vraptor.ioc.Component;
 
 @Component
@@ -38,9 +39,10 @@ public class UsuarioRepositoryImpl
 		Iterator<Usuario> it = usuarios.iterator();
 		while(it.hasNext()) {
 			Usuario current = it.next();
-			System.out.println("current " + current);
-			System.out.println("entity " + entity);
-			if(current.getId() == entity.getId()) {
+			System.out.println("current " + current.getId());
+			System.out.println("entity " + entity.getId());
+			if(current.getId().longValue() == entity.getId().longValue()) {
+				System.out.println("------->>>>>>");
 				it.remove();
 				break;
 			}
@@ -62,7 +64,7 @@ public class UsuarioRepositoryImpl
 
 	@Override
 	public List<Usuario> findAll() {
-		return Collections.unmodifiableList(usuarios);
+		return usuarios;
 	}
 
 }
